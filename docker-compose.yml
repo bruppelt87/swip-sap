@@ -1,6 +1,6 @@
 services:
   database:
-    container_name: swip-sap-database
+    container_name: swip-sap-database-1
     image: postgres:latest
     environment:
       - POSTGRES_USER=swip-sap
@@ -9,7 +9,6 @@ services:
 
   frontend:
     container_name: swip-sap-frontend
-    build:
-      context: ./frontend
+    build: ./frontend
     ports:
       - '80:80'

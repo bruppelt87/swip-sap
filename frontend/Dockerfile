@@ -4,7 +4,7 @@ FROM node:lts-alpine as build-stage
 WORKDIR /app
 
 # Update npm
-# RUN apk add --update npm
+RUN apk add --update npm
 
 # Copy the package.json and install dependencies
 COPY app/package*.json ./
