@@ -1,14 +1,22 @@
 services:
   database:
-    container_name: swip-sap-database-1
+    container_name: swip-sap-database
     image: postgres:latest
     environment:
       - POSTGRES_USER=swip-sap
       - POSTGRES_PASSWORD=swip-sap
       - POSTGRES_DB=swip-sap
 
+  # backend:
+  #   container_name: swip-sap-backend
+  #   build: backend
+  #   depends_on:
+  #     - database
+
   frontend:
     container_name: swip-sap-frontend
-    build: ./frontend
+    build: frontend
     ports:
       - '80:80'
+    depends_on:
+      - database

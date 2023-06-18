@@ -25,5 +25,5 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy from the build stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-EXPOSE 8080:80
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
