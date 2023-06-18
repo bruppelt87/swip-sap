@@ -1,0 +1,11 @@
+services:
+  database:
+    container_name: swip-sap-database
+    image: postgres:latest
+
+  frontend:
+    container_name: swip-sap-frontend
+    build:
+      context: ./frontend
+    ports:
+      - '80:80'
