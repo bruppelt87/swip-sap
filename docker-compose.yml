@@ -11,6 +11,5 @@ services:
     container_name: swip-sap-frontend
     build:
       context: ./frontend
-    command: nginx -g "daemon off"
     ports:
       - '80:80'
