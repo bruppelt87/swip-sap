@@ -1,20 +1,32 @@
-# build stage
+# Build stage
 FROM node:lts-alpine as build-stage
+
 WORKDIR /app
-COPY app/package*.json ./
+
+# Update npm
 RUN apk add --update npm
+
+# Copy the package.json and install dependencies
+COPY app/package*.json ./
 RUN npm install
+
+# Copy rest of the files
 COPY app/ .
+
+# Build the project
 RUN npm run build
 
-# production stage
+# Production stage
 FROM nginx:stable-alpine as production-stage
 
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+# RUN rm /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d
 
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d
+# Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy from the build stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD [ "nginx", "-g", "daemon off;" ]

@@ -2,6 +2,10 @@ services:
   database:
     container_name: swip-sap-database
     image: postgres:latest
+    environment:
+      - POSTGRES_USER=swip-sap
+      - POSTGRES_PASSWORD=swip-sap
+      - POSTGRES_DB=swip-sap
 
   frontend:
     container_name: swip-sap-frontend
